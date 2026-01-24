@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DESA BLADO</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylelist.css">
+
+    <script>
+        function showService(serviceId) {
+            document.getElementById('main-content').style.display = 'none';
+            document.querySelectorAll('.service-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(serviceId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goBack() {
+            document.querySelectorAll('.service-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('main-content').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>🌾 Desa Blado 🌾</h1>
+        <p>A peaceful community nestled in the countryside</p>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#events">Events</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="hero">
+        <h2>Welcome to Our Village</h2>
+        <p>Where tradition meets community</p>
+    </div>
+
+    <div id="main-content">
+        <div class="container">
+        <section id="about" class="section">
+            <h2>About Willowbrook</h2>
+            <p>Willowbrook is a charming village with a rich history dating back to the 1800s. Our community of 2,500 residents takes pride in preserving our heritage while embracing the future. Surrounded by rolling hills and farmland, we offer a peaceful retreat from the hustle and bustle of city life.</p>
+        </section>
+
+        <section id="events" class="section">
+            <h2>Upcoming Events</h2>
+            <div class="events">
+                <h3>🎪 Annual Harvest Festival</h3>
+                <p><strong>Date:</strong> September 15-17<br>
+                Join us for three days of celebration with local food, crafts, and entertainment!</p>
+            </div>
+            <div class="events">
+                <h3>📚 Community Book Fair</h3>
+                <p><strong>Date:</strong> October 5<br>
+                Browse books, meet local authors, and enjoy storytelling sessions for children.</p>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <h2>Village Services</h2>
+            <div class="grid">
+                <a href="#" class="card" onclick="showService('village-hall'); return false;">
+                    <h3>🏛️ Kantor Kecematan Blado</h3>
+                    <p>Administrative services, council meetings, and community gatherings. Open Monday-Friday, 9am-5pm.</p>
+                </a>
+                <a href="#" class="card" onclick="showService('clinic'); return false;">
+                    <h3>🏥 Puskesmas</h3>
+                    <p>Primary healthcare services with visiting specialists. Emergency services available 24/7.</p>
+                </a>
+                <a href="#" class="card" onclick="showService('school'); return false;">
+                    <h3>🎓 Sekolah</h3>
+                    <p>Excellence in education for children ages 5-11. Small class sizes and dedicated teachers.</p>
+                </a>
+                <a href="#" class="card" onclick="showService('market'); return false;">
+                    <h3>🛒 Pasar</h3>
+                    <p>Fresh local produce every Saturday morning. Support our local farmers and artisans!</p>
+                </a>
+                <a href="#" class="card" onclick="showService('community-center'); return false;">
+                    <h3>⛪ Tempat Komunitas</h3>
+                    <p>Host to clubs, classes, and social events. Available for private bookings.</p>
+                </a>
+                <a href="#" class="card" onclick="showService('Peternakan Ayam'); return false;">
+                    <h3>🐔 Peternakan Ayam</h3>
+                    <p>Peternakan Ayam</p>
+                </a>
+
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p><strong>Village Hall Address:</strong><br>
+                123 Main Street, Willowbrook<br><br>
+                <strong>Phone:</strong> (555) 123-4567<br>
+                <strong>Email:</strong> info@willowbrook-village.com<br>
+                <strong>Office Hours:</strong> Monday-Friday, 9:00am - 5:00pm</p>
+            </div>
+        </section>
+    </div>
+    </div>
+
+    <!-- Service Detail Pages -->
+    <div id="village-hall" class="service-page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">← Back to Home</button>
+            <div class="service-detail">
+                <img src="images\bladohall.jpg">    
+                <h2>🏛️ Kantor Kecematan Blado</h2>
+                <p>The Village Hall is the administrative heart of Willowbrook, serving our community since 1892. This historic building houses our local government offices and provides essential services to all residents.</p>
+                
+                <h3>Services Offered</h3>
+                <p>• Birth, death, and marriage certificates<br>
+                • Building permits and planning applications<br>
+                • Council tax inquiries<br>
+                • Community event bookings<br>
+                • Voter registration</p>
+                
+                <h3>Opening Hours</h3>
+                <p>Monday - Friday: 9:00am - 5:00pm<br>
+                Saturday: Closed<br>
+                Sunday: Closed</p>
+                
+                <h3>Contact Information</h3>
+                <p>Phone: (555) 123-4567<br>
+                Email: admin@willowbrook-village.com</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="clinic" class="service-page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">← Back to Home</button>
+            <div class="service-detail">
+                <h2>🏥 Medical Clinic</h2>
+                <p>Willowbrook Medical Clinic provides comprehensive primary healthcare services to our community. Our dedicated team of healthcare professionals is committed to your wellbeing.</p>
+                
+                <h3>Services</h3>
+                <p>• General practice consultations<br>
+                • Child health and immunizations<br>
+                • Chronic disease management<br>
+                • Minor injury treatment<br>
+                • Health screenings and checkups<br>
+                • Mental health support</p>
+                
+                <h3>Visiting Specialists</h3>
+                <p>• Physiotherapy (Tuesdays)<br>
+                • Dermatology (First Friday of month)<br>
+                • Cardiology (Second Wednesday of month)</p>
+                
+                <h3>Hours</h3>
+                <p>Monday - Friday: 8:00am - 6:00pm<br>
+                Saturday: 9:00am - 1:00pm (Emergencies only)<br>
+                Emergency Line: Available 24/7 at (555) 123-HELP</p>
+            </div>
+        </div>
+    </div>
+
+<div id="school" class="service-page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">← Back to Home</button>
+            <div class="service-detail">
+                <h2>🎓 Sekolah di Desa Blado</h2>
+                <p>Desa Blado is proud to offer quality education through multiple schools serving students from early childhood through secondary education. Our commitment to excellence ensures every child has access to outstanding learning opportunities.</p>
+                
+                <div class="school-showcase">
+                    <!-- School 1: TK (Kindergarten) -->
+                    <div class="school-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFE5B4' width='800' height='300'/%3E%3Crect fill='%23FF6B9D' x='200' y='100' width='400' height='150' rx='10'/%3E%3Ccircle fill='%23FFD93D' cx='300' cy='120' r='20'/%3E%3Ccircle fill='%234ECDC4' cx='400' cy='120' r='20'/%3E%3Ccircle fill='%2395E1D3' cx='500' cy='120' r='20'/%3E%3Crect fill='%23FFA07A' x='350' y='180' width='100' height='70'/%3E%3Ctext x='400' y='280' font-family='Arial' font-size='20' fill='%23333' text-anchor='middle'%3EKindergarten%3C/text%3E%3C/svg%3E" alt="TK Blado">
+                        <div class="school-card-content">
+                            <span class="school-type">TK (Kindergarten)</span>
+                            <h3>TK Bhakti Blado</h3>
+                            <p>Nurturing young minds through play-based learning and early childhood development.</p>
+                            <div class="school-info">
+                                <p><strong>Age Group:</strong> 4-6 years</p>
+                                <p><strong>Students:</strong> ~60 children</p>
+                                <p><strong>Hours:</strong> 7:30am - 11:00am</p>
+                                <p><strong>Programs:</strong> Play-based learning, Arts & Crafts, Music, Basic literacy</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School 2: SD (Primary School) -->
+                    <div class="school-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFF9C4' width='800' height='300'/%3E%3Crect fill='%23d32f2f' x='150' y='100' width='500' height='160' rx='5'/%3E%3Cpath fill='%23b71c1c' d='M140,100 L660,100 L700,70 L100,70 Z'/%3E%3Crect fill='%23b71c1c' x='375' y='30' width='50' height='70'/%3E%3Cpath fill='%23FFD700' d='M375,30 L425,30 L440,10 L360,10 Z'/%3E%3Ccircle fill='%23FFD700' cx='400' cy='50' r='8'/%3E%3Crect fill='%2364B5F6' x='180' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='260' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='490' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='570' y='130' width='50' height='60'/%3E%3Crect fill='%238B4513' x='410' y='180' width='60' height='80'/%3E%3Ctext x='400' y='280' font-family='Arial' font-size='20' fill='%232d5016' text-anchor='middle'%3EPrimary School%3C/text%3E%3C/svg%3E" alt="SD Blado">
+                        <div class="school-card-content">
+                            <span class="school-type">SD (Primary School)</span>
+                            <h3>SD Negeri Blado 1</h3>
+                            <p>Building strong foundations in core subjects with a focus on character development and community values.</p>
+                            <div class="school-info">
+                                <p><strong>Grades:</strong> 1-6 (Ages 6-12)</p>
+                                <p><strong>Students:</strong> ~240 students</p>
+                                <p><strong>Hours:</strong> 7:00am - 1:00pm</p>
+                                <p><strong>Specialties:</strong> Mathematics, Science, Indonesian Language, Local Culture</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School 3: SMP (Junior High School) -->
+                    <div class="school-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23E8F5E9' width='800' height='300'/%3E%3Crect fill='%234a7c2c' x='150' y='80' width='500' height='180' rx='5'/%3E%3Crect fill='%232d5016' x='180' y='100' width='100' height='80'/%3E%3Crect fill='%232d5016' x='300' y='100' width='100' height='80'/%3E%3Crect fill='%232d5016' x='420' y='100' width='100' height='80'/%3E%3Crect fill='%232d5016' x='540' y='100' width='100' height='80'/%3E%3Crect fill='%238B4513' x='370' y='200' width='60' height='60'/%3E%3Cpath fill='%23FFD700' d='M150,80 L400,40 L650,80 Z'/%3E%3Ctext x='400' y='285' font-family='Arial' font-size='20' fill='%232d5016' text-anchor='middle'%3EJunior High School%3C/text%3E%3C/svg%3E" alt="SMP Blado">
+                        <div class="school-card-content">
+                            <span class="school-type">SMP (Junior High)</span>
+                            <h3>SMP Negeri Blado</h3>
+                            <p>Preparing students for higher education with comprehensive academic programs and extracurricular activities.</p>
+                            <div class="school-info">
+                                <p><strong>Grades:</strong> 7-9 (Ages 12-15)</p>
+                                <p><strong>Students:</strong> ~320 students</p>
+                                <p><strong>Hours:</strong> 7:00am - 2:30pm</p>
+                                <p><strong>Focus Areas:</strong> STEM, Languages, Social Studies, Sports</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School 4: SMA (Senior High School) -->
+                    <div class="school-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23E3F2FD' width='800' height='300'/%3E%3Crect fill='%231565C0' x='100' y='70' width='600' height='190' rx='8'/%3E%3Crect fill='%230D47A1' x='120' y='90' width='130' height='90'/%3E%3Crect fill='%230D47A1' x='270' y='90' width='130' height='90'/%3E%3Crect fill='%230D47A1' x='420' y='90' width='130' height='90'/%3E%3Crect fill='%230D47A1' x='570' y='90' width='110' height='90'/%3E%3Crect fill='%23424242' x='350' y='200' width='100' height='60'/%3E%3Cpath fill='%23FFD700' d='M100,70 L400,20 L700,70 Z'/%3E%3Ccircle fill='%23FFD700' cx='400' cy='30' r='12'/%3E%3Ctext x='400' y='285' font-family='Arial' font-size='20' fill='%231565C0' text-anchor='middle'%3ESenior High School%3C/text%3E%3C/svg%3E" alt="SMA Blado">
+                        <div class="school-card-content">
+                            <span class="school-type">SMA (Senior High)</span>
+                            <h3>SMA Negeri Blado</h3>
+                            <p>Excellence in advanced education, preparing students for university and professional careers.</p>
+                            <div class="school-info">
+                                <p><strong>Grades:</strong> 10-12 (Ages 15-18)</p>
+                                <p><strong>Students:</strong> ~280 students</p>
+                                <p><strong>Hours:</strong> 6:45am - 3:00pm</p>
+                                <p><strong>Tracks:</strong> Science, Social Sciences, Languages</p>
+                                <p><strong>Achievements:</strong> Regional academic competitions, University partnerships</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School 5: Vocational School -->
+                    <div class="school-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFF3E0' width='800' height='300'/%3E%3Crect fill='%23E65100' x='150' y='80' width='500' height='180' rx='5'/%3E%3Crect fill='%23BF360C' x='180' y='100' width='100' height='100'/%3E%3Crect fill='%23BF360C' x='300' y='100' width='100' height='100'/%3E%3Crect fill='%23BF360C' x='420' y='100' width='100' height='100'/%3E%3Crect fill='%23BF360C' x='540' y='100' width='90' height='100'/%3E%3C-- Tools symbols --%3E%3Crect fill='%23FFD700' x='220' y='130' width='25' height='40' transform='rotate(45 232.5 150)'/%3E%3Ccircle fill='%23FFD700' cx='460' cy='150' r='20'/%3E%3Crect fill='%23FFD700' cx='585' cy='150' width='30' height='6'/%3E%3Crect fill='%238B4513' x='370' y='210' width='60' height='50'/%3E%3Ctext x='400' y='285' font-family='Arial' font-size='20' fill='%23E65100' text-anchor='middle'%3EVocational School%3C/text%3E%3C/svg%3E" alt="SMK">
+                        <div class="school-card-content">
+                            <span class="school-type">SMK (Vocational)</span>
+                            <h3>SMK Pertanian Blado</h3>
+                            <p>Vocational education focused on agriculture and agribusiness, preparing students for immediate employment or entrepreneurship.</p>
+                            <div class="school-info">
+                                <p><strong>Grades:</strong> 10-12 (Ages 15-18)</p>
+                                <p><strong>Students:</strong> ~200 students</p>
+                                <p><strong>Hours:</strong> 7:00am - 3:30pm</p>
+                                <p><strong>Majors:</strong> Agribusiness, Agricultural Technology, Animal Husbandry</p>
+                                <p><strong>Features:</strong> Internship programs, Practical farming experience, Industry partnerships</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="market" class="service-page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">← Back to Home</button>
+            <div class="service-detail">
+                <h2>🛒 Willowbrook Farmers Market</h2>
+                <p>Every Saturday morning, the village square transforms into a bustling marketplace featuring the finest local produce, crafts, and artisanal goods from our community and surrounding farms.</p>
+                
+                <h3>What You'll Find</h3>
+                <p>• Fresh organic vegetables and fruits<br>
+                • Local meats and dairy products<br>
+                • Artisan breads and baked goods<br>
+                • Homemade jams and preserves<br>
+                • Handcrafted items and gifts<br>
+                • Fresh flowers and plants</p>
+                
+                <h3>Special Features</h3>
+                <p>• Live music performances<br>
+                • Cooking demonstrations<br>
+                • Kids' activities corner<br>
+                • Coffee and breakfast vendors<br>
+                • Meet-the-farmer opportunities</p>
+                
+                <h3>Market Times</h3>
+                <p>Every Saturday: 8:00am - 1:00pm<br>
+                Location: Village Square<br>
+                (Rain or shine - covered stalls available)</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="community-center" class="service-page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">← Back to Home</button>
+            <div class="service-detail">
+                <h2>⛪ Willowbrook Community Center</h2>
+                <p>The heart of our village's social life, the Community Center hosts a variety of activities, classes, and events that bring neighbors together and strengthen our community bonds.</p>
+                
+                <h3>Regular Activities</h3>
+                <p>• Yoga and fitness classes (Mon/Wed/Fri mornings)<br>
+                • Senior citizens' club (Tuesday afternoons)<br>
+                • Youth club (Friday evenings)<br>
+                • Art and craft workshops (Thursdays)<br>
+                • Dance lessons (Wednesday evenings)<br>
+                • Book club (First Monday of month)</p>
+                
+                <h3>Facilities Available for Booking</h3>
+                <p>• Main hall (capacity 150 people)<br>
+                • Meeting rooms (10-30 people)<br>
+                • Kitchen facilities<br>
+                • Audio/visual equipment<br>
+                • Outdoor patio area</p>
+                
+                <h3>Booking Information</h3>
+                <p>Contact: (555) 123-4580<br>
+                Email: bookings@willowbrook-cc.com<br>
+                Resident rates available</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="Peternakan Ayam" class="service-page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">← Back to Home</button>
+            <div class="service-detail">
+                <h2>🐔peternakan ayam</h2>
+                <p>tempat peternakan ayam di desa blado</p>
+                <div class="school-showcase">
+                    <!-- peternakan ayam 1 -->
+                    <div class="school-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFE5B4' width='800' height='300'/%3E%3Crect fill='%23FF6B9D' x='200' y='100' width='400' height='150' rx='10'/%3E%3Ccircle fill='%23FFD93D' cx='300' cy='120' r='20'/%3E%3Ccircle fill='%234ECDC4' cx='400' cy='120' r='20'/%3E%3Ccircle fill='%2395E1D3' cx='500' cy='120' r='20'/%3E%3Crect fill='%23FFA07A' x='350' y='180' width='100' height='70'/%3E%3Ctext x='400' y='280' font-family='Arial' font-size='20' fill='%23333' text-anchor='middle'%3EKindergarten%3C/text%3E%3C/svg%3E" alt="TK Blado">
+                        <div class="school-card-content">
+                            <h3>Peternakan Ayam</h3>
+                            <p>paragraf tentang Peternakan ayam</p>
+                        </div>
+                    </div>
+
+                    <!-- peternakan ayam 2 -->
+                    <div class="school-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFF9C4' width='800' height='300'/%3E%3Crect fill='%23d32f2f' x='150' y='100' width='500' height='160' rx='5'/%3E%3Cpath fill='%23b71c1c' d='M140,100 L660,100 L700,70 L100,70 Z'/%3E%3Crect fill='%23b71c1c' x='375' y='30' width='50' height='70'/%3E%3Cpath fill='%23FFD700' d='M375,30 L425,30 L440,10 L360,10 Z'/%3E%3Ccircle fill='%23FFD700' cx='400' cy='50' r='8'/%3E%3Crect fill='%2364B5F6' x='180' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='260' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='490' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='570' y='130' width='50' height='60'/%3E%3Crect fill='%238B4513' x='410' y='180' width='60' height='80'/%3E%3Ctext x='400' y='280' font-family='Arial' font-size='20' fill='%232d5016' text-anchor='middle'%3EPrimary School%3C/text%3E%3C/svg%3E" alt="SD Blado">
+                        <div class="school-card-content">
+                            <h3>peternakan ayam 2</h3>
+                            <p>Building strong foundations in core subjects with a focus on character development and community values.</p>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Desa Blado. All rights reserved.</p>
+        <p>Building community, one neighbor at a time.</p>
+    </footer>
+</body>
+</html>
