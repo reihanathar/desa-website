@@ -1,417 +1,408 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DESA BLADO</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="stylelist.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-
-    <script>
-        function showService(serviceId) {
-            document.getElementById('main-content').style.display = 'none';
-            document.querySelectorAll('.service-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(serviceId).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        function goBack() {
-            document.querySelectorAll('.service-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById('main-content').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Desa Blado</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="images/Kabupaten_Batang.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
-    <header>
-        <h1>🌾 Desa Blado 🌾</h1>
-        <p>A peaceful community nestled in the countryside</p>
-    </header>
 
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="container nav-wrapper">
+    <div class="logo">
+        <img src="images/Kabupaten_Batang.png" alt="Logo Kabupaten Batang" class="logo-img">
+        <div class="logo-text">
+            <div class="logo-title">Desa Blado</div>
+            <div class="logo-subtitle">Blado – Batang</div>
+        </div>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <nav>
-        <a href="#about">About</a>
-        <a href="#events">Events</a>
-        <a href="#map">Map</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#hero">Beranda</a></li>
+        <li><a href="#statistik">Profil Desa</a></li>
+        <li><a href="#visi">Visi & Misi</a></li>
+        <li><a href="#peta">Peta Desa</a></li>
+        <li><a href="#perangkat-desa">Struktur</a></li>
+        <li><a href="#footer">Kontak</a></li>
+      </ul>
     </nav>
+  </div>
+</header>
 
-    <div class="hero">
-        <h2>Welcome to Our Village</h2>
-        <p>Where tradition meets community</p>
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h2>Menuju Desa yang Lebih Sejahtera</h2>
+    <p>
+      Desa Blado berkomitmen membangun masyarakat mandiri, aman, dan berdaya saing
+      melalui pelayanan publik yang transparan dan inovatif.
+    </p>
+    <a href="#peta" class="hero-btn">Jelajahi Sekarang</a>
+  </div>
+</section>
+
+<!-- STATISTIK -->
+<section id="statistik" class="section">
+  <div class="container">
+    <h3 class="section-title">Statistik Desa</h3>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h4>Jumlah Penduduk</h4>
+        <p>4.597 Jiwa</p>
+      </div>
+      <div class="stat-card">
+        <h4>Luas Wilayah</h4>
+        <p>147,48 Ha</p>
+      </div>
+      <div class="stat-card">
+        <h4>Ketinggian</h4>
+        <p>546 mdpl</p>
+      </div>
+      <div class="stat-card">
+        <h4>Padukuhan</h4>
+        <p>5 Dusun</p>
+      </div>
+      <div class="stat-card">
+        <h4>Koordinat</h4>
+        <p>109.83581 , -7.070288</p>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div id="main-content">
-        <div class="container">
-        <section id="about" class="section">
-            <h2>About Willowbrook</h2>
-            <p>Willowbrook is a charming village with a rich history dating back to the 1800s. Our community of 2,500 residents takes pride in preserving our heritage while embracing the future. Surrounded by rolling hills and farmland, we offer a peaceful retreat from the hustle and bustle of city life.</p>
-        </section>
-
-        <section id="events" class="section">
-            <h2>Upcoming Events</h2>
-            <div class="events">
-                <h3>🎪 Annual Harvest Festival</h3>
-                <p><strong>Date:</strong> September 15-17<br>
-                Join us for three days of celebration with local food, crafts, and entertainment!</p>
-            </div>
-            <div class="events">
-                <h3>📚 Community Book Fair</h3>
-                <p><strong>Date:</strong> October 5<br>
-                Browse books, meet local authors, and enjoy storytelling sessions for children.</p>
-            </div>
-        </section>
-
-        <section id="map" class="section">
-            <h2>Interactive Village Map</h2>
-            <p>Explore Desa Blado with an interactive map powered by Leaflet and CartoDB Positron. Zoom in to see key locations like the village hall, schools, and the local market.</p>
-            <div class="map-wrapper">
-                <div id="village-map" class="map-canvas" role="application" aria-label="Interactive map of Desa Blado"></div>
-                <div class="map-legend">
-                    <h3>Map Highlights</h3>
-                    <ul>
-                        <li>🏛️ Kantor Kecamatan Blado</li>
-                        <li>🏥 Puskesmas</li>
-                        <li>🎓 Kompleks Sekolah</li>
-                        <li>🛒 Pasar Blado</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="services" class="section">
-            <h2>Village Services</h2>
-            <div class="grid">
-                <a href="#" class="card" onclick="showService('village-hall'); return false;">
-                    <h3>🏛️ Kantor Kecematan Blado</h3>
-                    <p>Administrative services, council meetings, and community gatherings. Open Monday-Friday, 9am-5pm.</p>
-                </a>
-                <a href="#" class="card" onclick="showService('clinic'); return false;">
-                    <h3>🏥 Puskesmas</h3>
-                    <p>Primary healthcare services with visiting specialists. Emergency services available 24/7.</p>
-                </a>
-                <a href="#" class="card" onclick="showService('school'); return false;">
-                    <h3>🎓 Sekolah</h3>
-                    <p>Excellence in education for children ages 5-11. Small class sizes and dedicated teachers.</p>
-                </a>
-                <a href="#" class="card" onclick="showService('market'); return false;">
-                    <h3>🛒 Pasar</h3>
-                    <p>Fresh local produce every Saturday morning. Support our local farmers and artisans!</p>
-                </a>
-                <a href="#" class="card" onclick="showService('community-center'); return false;">
-                    <h3>⛪ Tempat Komunitas</h3>
-                    <p>Host to clubs, classes, and social events. Available for private bookings.</p>
-                </a>
-                <a href="#" class="card" onclick="showService('Peternakan Ayam'); return false;">
-                    <h3>🐔 Peternakan Ayam</h3>
-                    <p>Peternakan Ayam</p>
-                </a>
-
-            </div>
-        </section>
-
-        <section id="contact" class="section">
-            <h2>Contact Us</h2>
-            <div class="contact-info">
-                <p><strong>Village Hall Address:</strong><br>
-                123 Main Street, Willowbrook<br><br>
-                <strong>Phone:</strong> (555) 123-4567<br>
-                <strong>Email:</strong> info@willowbrook-village.com<br>
-                <strong>Office Hours:</strong> Monday-Friday, 9:00am - 5:00pm</p>
-            </div>
-        </section>
+<!-- VISI MISI -->
+<section id="visi" class="section alt">
+  <div class="container">
+    <h3 class="section-title">Visi & Misi</h3>
+    <div class="visi-misi">
+      <div class="visi">
+        <h4>Visi</h4>
+        <p>
+          Menciptakan masyarakat Desa Blado yang mandiri dalam bidang pertanian,
+          perdagangan, serta mampu berpikir cerdas dalam menanggulangi permasalahan
+          demi terciptanya desa yang aman, damai, dan sejahtera.
+        </p>
+      </div>
+      <div class="misi">
+        <h4>Misi</h4>
+        <ul>
+          <li>Meningkatkan sarana dan prasarana pertanian dan jalan</li>
+          <li>Meningkatkan keamanan lingkungan</li>
+          <li>Meningkatkan kualitas sumber daya manusia</li>
+          <li>Meningkatkan kesejahteraan masyarakat</li>
+          <li>Memupuk persatuan dan kebersamaan</li>
+          <li>Meningkatkan mutu pendidikan</li>
+          <li>Meningkatkan toleransi dan solidaritas antar umat beragama</li>
+          <li>Meningkatkan ketaatan hukum</li>
+        </ul>
+      </div>
     </div>
-    </div>
+  </div>
+</section>
 
-    <!-- Service Detail Pages -->
-    <div id="village-hall" class="service-page">
-        <div class="container">
-            <button class="back-button" onclick="goBack()">← Back to Home</button>
-            <div class="service-detail">
-                <img src="images\bladohall.jpg">    
-                <h2>🏛️ Kantor Kecematan Blado</h2>
-                <p>The Village Hall is the administrative heart of Willowbrook, serving our community since 1892. This historic building houses our local government offices and provides essential services to all residents.</p>
-                
-                <h3>Services Offered</h3>
-                <p>• Birth, death, and marriage certificates<br>
-                • Building permits and planning applications<br>
-                • Council tax inquiries<br>
-                • Community event bookings<br>
-                • Voter registration</p>
-                
-                <h3>Opening Hours</h3>
-                <p>Monday - Friday: 9:00am - 5:00pm<br>
-                Saturday: Closed<br>
-                Sunday: Closed</p>
-                
-                <h3>Contact Information</h3>
-                <p>Phone: (555) 123-4567<br>
-                Email: admin@willowbrook-village.com</p>
-            </div>
+<!-- PETA -->
+<section id="peta" class="section">
+  <div class="container">
+    <h3 class="section-title">Peta Interaktif Desa</h3>
+    
+    <div class="map-wrapper">
+      <div id="map"></div>
+
+      <!-- FULLSCREEN BUTTON-->
+      <button id="fullscreenBtn" class="fullscreen-floating-btn" title="Toggle Fullscreen">
+        <span class="fullscreen-icon">⛶</span>
+      </button>
+
+      <!-- PANEL FLOATING -->
+      <div id="infoPanel" class="map-panel">
+        <!-- TOGGLE BUTTON -->
+        <button class="panel-toggle-btn" id="panelToggleBtn" title="Toggle Panel">
+          <span class="toggle-text">✕</span>
+        </button>
+        
+        <!-- TABS INTERNAL -->
+        <div class="panel-tabs">
+          <button class="panel-tab-btn active" data-tab="administrasi">
+            Administrasi
+          </button>
+          <button class="panel-tab-btn" data-tab="fasilitas">
+            Fasilitas Umum
+          </button>
+          <button class="panel-tab-btn" data-tab="kesehatan">
+            Fasilitas Kesehatan
+          </button>
         </div>
-    </div>
+        
+        <div class="panel-content">
+          <!-- TAB CONTENT: ADMINISTRASI-->
+          <div id="administrasiTab" class="tab-content active">
+            <h3>Batas Padukuhan</h3>
+            
+            <p class="tab-description">Peta administrasi menampilkan batas wilayah 5 padukuhan di Desa Blado.</p>
 
-    <div id="clinic" class="service-page">
-        <div class="container">
-            <button class="back-button" onclick="goBack()">← Back to Home</button>
-            <div class="service-detail">
-                <h2>🏥 Medical Clinic</h2>
-                <p>Willowbrook Medical Clinic provides comprehensive primary healthcare services to our community. Our dedicated team of healthcare professionals is committed to your wellbeing.</p>
-                
-                <h3>Services</h3>
-                <p>• General practice consultations<br>
-                • Child health and immunizations<br>
-                • Chronic disease management<br>
-                • Minor injury treatment<br>
-                • Health screenings and checkups<br>
-                • Mental health support</p>
-                
-                <h3>Visiting Specialists</h3>
-                <p>• Physiotherapy (Tuesdays)<br>
-                • Dermatology (First Friday of month)<br>
-                • Cardiology (Second Wednesday of month)</p>
-                
-                <h3>Hours</h3>
-                <p>Monday - Friday: 8:00am - 6:00pm<br>
-                Saturday: 9:00am - 1:00pm (Emergencies only)<br>
-                Emergency Line: Available 24/7 at (555) 123-HELP</p>
+            <!-- Legend batas -->
+            <div id="boundaryLegend">
+              <h4>Legenda Padukuhan</h4>
+              <ul>
+                <li><span style="background: rgba(255,0,0,.4)"></span> Bandusari</li>
+                <li><span style="background: rgba(0,255,0,.4)"></span> Sembir Banyuanyar</li>
+                <li><span style="background: rgba(0,0,255,.4)"></span> Blado</li>
+                <li><span style="background: rgba(255,255,0,.4)"></span> Grogol</li>
+                <li><span style="background: rgba(255,0,255,.4)"></span> Kepokoh</li>
+              </ul>
             </div>
-        </div>
-    </div>
 
-<div id="school" class="service-page">
-        <div class="container">
-            <button class="back-button" onclick="goBack()">← Back to Home</button>
-            <div class="service-detail">
-                <h2>🎓 Sekolah di Desa Blado</h2>
-                <p>Desa Blado is proud to offer quality education through multiple schools serving students from early childhood through secondary education. Our commitment to excellence ensures every child has access to outstanding learning opportunities.</p>
-                
-                <div class="school-showcase">
-                    <!-- School 1: TK (Kindergarten) -->
-                    <div class="school-card">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFE5B4' width='800' height='300'/%3E%3Crect fill='%23FF6B9D' x='200' y='100' width='400' height='150' rx='10'/%3E%3Ccircle fill='%23FFD93D' cx='300' cy='120' r='20'/%3E%3Ccircle fill='%234ECDC4' cx='400' cy='120' r='20'/%3E%3Ccircle fill='%2395E1D3' cx='500' cy='120' r='20'/%3E%3Crect fill='%23FFA07A' x='350' y='180' width='100' height='70'/%3E%3Ctext x='400' y='280' font-family='Arial' font-size='20' fill='%23333' text-anchor='middle'%3EKindergarten%3C/text%3E%3C/svg%3E" alt="TK Blado">
-                        <div class="school-card-content">
-                            <span class="school-type">TK (Kindergarten)</span>
-                            <h3>TK Bhakti Blado</h3>
-                            <p>Nurturing young minds through play-based learning and early childhood development.</p>
-                            <div class="school-info">
-                                <p><strong>Age Group:</strong> 4-6 years</p>
-                                <p><strong>Students:</strong> ~60 children</p>
-                                <p><strong>Hours:</strong> 7:30am - 11:00am</p>
-                                <p><strong>Programs:</strong> Play-based learning, Arts & Crafts, Music, Basic literacy</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- School 2: SD (Primary School) -->
-                    <div class="school-card">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFF9C4' width='800' height='300'/%3E%3Crect fill='%23d32f2f' x='150' y='100' width='500' height='160' rx='5'/%3E%3Cpath fill='%23b71c1c' d='M140,100 L660,100 L700,70 L100,70 Z'/%3E%3Crect fill='%23b71c1c' x='375' y='30' width='50' height='70'/%3E%3Cpath fill='%23FFD700' d='M375,30 L425,30 L440,10 L360,10 Z'/%3E%3Ccircle fill='%23FFD700' cx='400' cy='50' r='8'/%3E%3Crect fill='%2364B5F6' x='180' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='260' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='490' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='570' y='130' width='50' height='60'/%3E%3Crect fill='%238B4513' x='410' y='180' width='60' height='80'/%3E%3Ctext x='400' y='280' font-family='Arial' font-size='20' fill='%232d5016' text-anchor='middle'%3EPrimary School%3C/text%3E%3C/svg%3E" alt="SD Blado">
-                        <div class="school-card-content">
-                            <span class="school-type">SD (Primary School)</span>
-                            <h3>SD Negeri Blado 1</h3>
-                            <p>Building strong foundations in core subjects with a focus on character development and community values.</p>
-                            <div class="school-info">
-                                <p><strong>Grades:</strong> 1-6 (Ages 6-12)</p>
-                                <p><strong>Students:</strong> ~240 students</p>
-                                <p><strong>Hours:</strong> 7:00am - 1:00pm</p>
-                                <p><strong>Specialties:</strong> Mathematics, Science, Indonesian Language, Local Culture</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- School 3: SMP (Junior High School) -->
-                    <div class="school-card">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23E8F5E9' width='800' height='300'/%3E%3Crect fill='%234a7c2c' x='150' y='80' width='500' height='180' rx='5'/%3E%3Crect fill='%232d5016' x='180' y='100' width='100' height='80'/%3E%3Crect fill='%232d5016' x='300' y='100' width='100' height='80'/%3E%3Crect fill='%232d5016' x='420' y='100' width='100' height='80'/%3E%3Crect fill='%232d5016' x='540' y='100' width='100' height='80'/%3E%3Crect fill='%238B4513' x='370' y='200' width='60' height='60'/%3E%3Cpath fill='%23FFD700' d='M150,80 L400,40 L650,80 Z'/%3E%3Ctext x='400' y='285' font-family='Arial' font-size='20' fill='%232d5016' text-anchor='middle'%3EJunior High School%3C/text%3E%3C/svg%3E" alt="SMP Blado">
-                        <div class="school-card-content">
-                            <span class="school-type">SMP (Junior High)</span>
-                            <h3>SMP Negeri Blado</h3>
-                            <p>Preparing students for higher education with comprehensive academic programs and extracurricular activities.</p>
-                            <div class="school-info">
-                                <p><strong>Grades:</strong> 7-9 (Ages 12-15)</p>
-                                <p><strong>Students:</strong> ~320 students</p>
-                                <p><strong>Hours:</strong> 7:00am - 2:30pm</p>
-                                <p><strong>Focus Areas:</strong> STEM, Languages, Social Studies, Sports</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- School 4: SMA (Senior High School) -->
-                    <div class="school-card">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23E3F2FD' width='800' height='300'/%3E%3Crect fill='%231565C0' x='100' y='70' width='600' height='190' rx='8'/%3E%3Crect fill='%230D47A1' x='120' y='90' width='130' height='90'/%3E%3Crect fill='%230D47A1' x='270' y='90' width='130' height='90'/%3E%3Crect fill='%230D47A1' x='420' y='90' width='130' height='90'/%3E%3Crect fill='%230D47A1' x='570' y='90' width='110' height='90'/%3E%3Crect fill='%23424242' x='350' y='200' width='100' height='60'/%3E%3Cpath fill='%23FFD700' d='M100,70 L400,20 L700,70 Z'/%3E%3Ccircle fill='%23FFD700' cx='400' cy='30' r='12'/%3E%3Ctext x='400' y='285' font-family='Arial' font-size='20' fill='%231565C0' text-anchor='middle'%3ESenior High School%3C/text%3E%3C/svg%3E" alt="SMA Blado">
-                        <div class="school-card-content">
-                            <span class="school-type">SMA (Senior High)</span>
-                            <h3>SMA Negeri Blado</h3>
-                            <p>Excellence in advanced education, preparing students for university and professional careers.</p>
-                            <div class="school-info">
-                                <p><strong>Grades:</strong> 10-12 (Ages 15-18)</p>
-                                <p><strong>Students:</strong> ~280 students</p>
-                                <p><strong>Hours:</strong> 6:45am - 3:00pm</p>
-                                <p><strong>Tracks:</strong> Science, Social Sciences, Languages</p>
-                                <p><strong>Achievements:</strong> Regional academic competitions, University partnerships</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- School 5: Vocational School -->
-                    <div class="school-card">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFF3E0' width='800' height='300'/%3E%3Crect fill='%23E65100' x='150' y='80' width='500' height='180' rx='5'/%3E%3Crect fill='%23BF360C' x='180' y='100' width='100' height='100'/%3E%3Crect fill='%23BF360C' x='300' y='100' width='100' height='100'/%3E%3Crect fill='%23BF360C' x='420' y='100' width='100' height='100'/%3E%3Crect fill='%23BF360C' x='540' y='100' width='90' height='100'/%3E%3C-- Tools symbols --%3E%3Crect fill='%23FFD700' x='220' y='130' width='25' height='40' transform='rotate(45 232.5 150)'/%3E%3Ccircle fill='%23FFD700' cx='460' cy='150' r='20'/%3E%3Crect fill='%23FFD700' cx='585' cy='150' width='30' height='6'/%3E%3Crect fill='%238B4513' x='370' y='210' width='60' height='50'/%3E%3Ctext x='400' y='285' font-family='Arial' font-size='20' fill='%23E65100' text-anchor='middle'%3EVocational School%3C/text%3E%3C/svg%3E" alt="SMK">
-                        <div class="school-card-content">
-                            <span class="school-type">SMK (Vocational)</span>
-                            <h3>SMK Pertanian Blado</h3>
-                            <p>Vocational education focused on agriculture and agribusiness, preparing students for immediate employment or entrepreneurship.</p>
-                            <div class="school-info">
-                                <p><strong>Grades:</strong> 10-12 (Ages 15-18)</p>
-                                <p><strong>Students:</strong> ~200 students</p>
-                                <p><strong>Hours:</strong> 7:00am - 3:30pm</p>
-                                <p><strong>Majors:</strong> Agribusiness, Agricultural Technology, Animal Husbandry</p>
-                                <p><strong>Features:</strong> Internship programs, Practical farming experience, Industry partnerships</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <!-- Info tambahan -->
+            <div class="admin-info">
+              <h4>Informasi Wilayah</h4>
+              <div class="info-item">
+                <strong>Jumlah Padukuhan:</strong> 5
+              </div>
+              <div class="info-item">
+                <strong>Luas Total:</strong> 147,48 Ha
+              </div>
+              <div class="info-item">
+                <strong>Ketinggian:</strong> 546 mdpl
+              </div>
             </div>
-        </div>
-    </div>
+          </div>
 
+          <!-- TAB CONTENT: FASILITAS -->
+          <div id="fasilitasTab" class="tab-content">
+            <h3>Fasilitas Umum</h3>
+            <div class="tab-scroll">
 
-    <div id="market" class="service-page">
-        <div class="container">
-            <button class="back-button" onclick="goBack()">← Back to Home</button>
-            <div class="service-detail">
-                <h2>🛒 Willowbrook Farmers Market</h2>
-                <p>Every Saturday morning, the village square transforms into a bustling marketplace featuring the finest local produce, crafts, and artisanal goods from our community and surrounding farms.</p>
-                
-                <h3>What You'll Find</h3>
-                <p>• Fresh organic vegetables and fruits<br>
-                • Local meats and dairy products<br>
-                • Artisan breads and baked goods<br>
-                • Homemade jams and preserves<br>
-                • Handcrafted items and gifts<br>
-                • Fresh flowers and plants</p>
-                
-                <h3>Special Features</h3>
-                <p>• Live music performances<br>
-                • Cooking demonstrations<br>
-                • Kids' activities corner<br>
-                • Coffee and breakfast vendors<br>
-                • Meet-the-farmer opportunities</p>
-                
-                <h3>Market Times</h3>
-                <p>Every Saturday: 8:00am - 1:00pm<br>
-                Location: Village Square<br>
-                (Rain or shine - covered stalls available)</p>
+            <p class="tab-description">Peta fasilitas umum menampilkan lokasi berbagai fasilitas publik di Desa Blado seperti sekolah, tempat ibadah, kantor pemerintahan, dan fasilitas ekonomi.</p>
+
+            <!-- Category filter -->
+            <div id="categoryFilterSection">
+              <label class="check-all">
+                <input type="checkbox" id="checkAll" checked>
+                Pilih Semua
+              </label>
+
+              <div class="category-list">
+                <label><input type="checkbox" class="category-check" value="Kesehatan" checked> Kesehatan</label>
+                <label><input type="checkbox" class="category-check" value="Pendidikan" checked> Pendidikan</label>
+                <label><input type="checkbox" class="category-check" value="Pemerintahan" checked> Pemerintahan</label>
+                <label><input type="checkbox" class="category-check" value="Ekonomi" checked> Ekonomi</label>
+                <label><input type="checkbox" class="category-check" value="Tempat Ibadah" checked> Tempat Ibadah</label>
+                <label><input type="checkbox" class="category-check" value="SD" checked> SD</label>
+                <label><input type="checkbox" class="category-check" value="SMP" checked> SMP</label>
+                <label><input type="checkbox" class="category-check" value="TK" checked> TK</label>
+                <label><input type="checkbox" class="category-check" value="PAUD" checked> PAUD</label>
+              </div>
             </div>
-        </div>
-    </div>
 
-    <div id="community-center" class="service-page">
-        <div class="container">
-            <button class="back-button" onclick="goBack()">← Back to Home</button>
-            <div class="service-detail">
-                <h2>⛪ Willowbrook Community Center</h2>
-                <p>The heart of our village's social life, the Community Center hosts a variety of activities, classes, and events that bring neighbors together and strengthen our community bonds.</p>
-                
-                <h3>Regular Activities</h3>
-                <p>• Yoga and fitness classes (Mon/Wed/Fri mornings)<br>
-                • Senior citizens' club (Tuesday afternoons)<br>
-                • Youth club (Friday evenings)<br>
-                • Art and craft workshops (Thursdays)<br>
-                • Dance lessons (Wednesday evenings)<br>
-                • Book club (First Monday of month)</p>
-                
-                <h3>Facilities Available for Booking</h3>
-                <p>• Main hall (capacity 150 people)<br>
-                • Meeting rooms (10-30 people)<br>
-                • Kitchen facilities<br>
-                • Audio/visual equipment<br>
-                • Outdoor patio area</p>
-                
-                <h3>Booking Information</h3>
-                <p>Contact: (555) 123-4580<br>
-                Email: bookings@willowbrook-cc.com<br>
-                Resident rates available</p>
+            <!-- Legend fasilitas umum -->
+            <div id="facilitiesLegend" style="margin-top: 10px; padding: 10px; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0;">
+              <h4>Legenda Kategori</h4>
+              <ul style="list-style: none; padding: 0; margin: 6px 0 0;">
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #e74c3c;"></span> Kesehatan
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #3498db;"></span> Pendidikan
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #9b59b6;"></span> Pemerintahan
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #f39c12;"></span> Ekonomi
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #27ae60;"></span> Tempat Ibadah
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #16a085;"></span> SD
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #2980b9;"></span> SMP
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #8e44ad;"></span> TK
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #c0392b;"></span> PAUD
+                </li>
+              </ul>
             </div>
-        </div>
-    </div>
-
-    <div id="Peternakan Ayam" class="service-page">
-        <div class="container">
-            <button class="back-button" onclick="goBack()">← Back to Home</button>
-            <div class="service-detail">
-                <h2>🐔peternakan ayam</h2>
-                <p>tempat peternakan ayam di desa blado</p>
-                <div class="school-showcase">
-                    <!-- peternakan ayam 1 -->
-                    <div class="school-card">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFE5B4' width='800' height='300'/%3E%3Crect fill='%23FF6B9D' x='200' y='100' width='400' height='150' rx='10'/%3E%3Ccircle fill='%23FFD93D' cx='300' cy='120' r='20'/%3E%3Ccircle fill='%234ECDC4' cx='400' cy='120' r='20'/%3E%3Ccircle fill='%2395E1D3' cx='500' cy='120' r='20'/%3E%3Crect fill='%23FFA07A' x='350' y='180' width='100' height='70'/%3E%3Ctext x='400' y='280' font-family='Arial' font-size='20' fill='%23333' text-anchor='middle'%3EKindergarten%3C/text%3E%3C/svg%3E" alt="TK Blado">
-                        <div class="school-card-content">
-                            <h3>Peternakan Ayam</h3>
-                            <p>paragraf tentang Peternakan ayam</p>
-                        </div>
-                    </div>
-
-                    <!-- peternakan ayam 2 -->
-                    <div class="school-card">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Crect fill='%23FFF9C4' width='800' height='300'/%3E%3Crect fill='%23d32f2f' x='150' y='100' width='500' height='160' rx='5'/%3E%3Cpath fill='%23b71c1c' d='M140,100 L660,100 L700,70 L100,70 Z'/%3E%3Crect fill='%23b71c1c' x='375' y='30' width='50' height='70'/%3E%3Cpath fill='%23FFD700' d='M375,30 L425,30 L440,10 L360,10 Z'/%3E%3Ccircle fill='%23FFD700' cx='400' cy='50' r='8'/%3E%3Crect fill='%2364B5F6' x='180' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='260' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='490' y='130' width='50' height='60'/%3E%3Crect fill='%2364B5F6' x='570' y='130' width='50' height='60'/%3E%3Crect fill='%238B4513' x='410' y='180' width='60' height='80'/%3E%3Ctext x='400' y='280' font-family='Arial' font-size='20' fill='%232d5016' text-anchor='middle'%3EPrimary School%3C/text%3E%3C/svg%3E" alt="SD Blado">
-                        <div class="school-card-content">
-                            <h3>peternakan ayam 2</h3>
-                            <p>Building strong foundations in core subjects with a focus on character development and community values.</p>
-                        </div>
-                    </div>
-
             </div>
+          </div>
+
+          <!-- TAB CONTENT: FASILITAS KESEHATAN -->
+          <div id="kesehatanTab" class="tab-content">
+            <h3>Fasilitas Kesehatan</h3>
+            
+            <p class="tab-description">Peta fasilitas kesehatan menampilkan lokasi apotek, puskesmas, praktik bidan, dan praktik dokter di Desa Blado.</p>
+
+            <!-- Filter kategori kesehatan -->
+            <div id="healthCategorySection">
+              <label class="check-all">
+                <input type="checkbox" id="checkAllHealth" checked>
+                Pilih Semua
+              </label>
+
+              <div class="category-list">
+                <label><input type="checkbox" class="health-category-check" value="Apotek" checked> Apotek</label>
+                <label><input type="checkbox" class="health-category-check" value="Puskesmas" checked> Puskesmas</label>
+                <label><input type="checkbox" class="health-category-check" value="Praktik Bidan" checked> Praktik Bidan</label>
+                <label><input type="checkbox" class="health-category-check" value="Praktik Dokter" checked> Praktik Dokter</label>
+              </div>
+            </div>
+
+            <!-- Legend fasilitas kesehatan -->
+            <div id="healthLegend" style="margin-top: 10px; padding: 10px; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0;">
+              <h4>Legenda</h4>
+              <ul style="list-style: none; padding: 0; margin: 6px 0 0;">
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #e74c3c;"></span> Apotek
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #3498db;"></span> Puskesmas
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #9b59b6;"></span> Praktik Bidan
+                </li>
+                <li style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px; color: #475569;">
+                  <span style="width: 16px; height: 16px; display: inline-block; border-radius: 3px; background: #27ae60;"></span> Praktik Dokter
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2026 Desa Blado. All rights reserved.</p>
-        <p>Building community, one neighbor at a time.</p>
-    </footer>
+<section id="peta-kerawanan" class="peta-kerawanan">
+    <div class="container">
+        <h3 class="section-title">Peta Kerawanan Bencana</h3>
+        <img src="images/peta-kerawanan-bencana.jpeg" alt="Peta Kerawanan Bencana Desa Blado" class="img-map">
+    </div>
+</section>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const map = L.map('village-map').setView([-7.099, 109.924], 13);
+<!-- PERANGKAT DESA -->
+<section class="section alt" id="perangkat-desa">
+  <div class="container">
+    <h3 class="section-title">Perangkat Desa</h3>
 
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-            }).addTo(map);
+    <div class="perangkat-grid">
+      <div class="perangkat-card">
+        <img src="images/perangkat/PAK_KADES_WEB_NEW.jpg" alt="Kepala Desa Blado">
+        <h4>H CARYOSO</h4>
+        <p>Kepala Desa</p>
+      </div>
 
-            const locations = [
-                {
-                    name: 'Kantor Kecamatan Blado',
-                    coords: [-7.094, 109.929],
-                    description: 'Pusat administrasi dan layanan publik.'
-                },
-                {
-                    name: 'Puskesmas Blado',
-                    coords: [-7.102, 109.917],
-                    description: 'Layanan kesehatan utama desa.'
-                },
-                {
-                    name: 'Kompleks Sekolah',
-                    coords: [-7.088, 109.922],
-                    description: 'Area pendidikan dari TK hingga SMA.'
-                },
-                {
-                    name: 'Pasar Blado',
-                    coords: [-7.107, 109.934],
-                    description: 'Pusat ekonomi dan belanja warga.'
-                }
-            ];
+      <div class="perangkat-card">
+        <img src="images/perangkat/BU_TRI_crop.png" alt="Sekretaris Desa">
+        <h4>TRI SULISTIYOWATI</h4>
+        <p>Sekretaris Desa</p>
+      </div>
 
-            locations.forEach(location => {
-                L.marker(location.coords)
-                    .addTo(map)
-                    .bindPopup(`<strong>${location.name}</strong><br>${location.description}`);
-            });
-        });
-    </script>
+      <div class="perangkat-card">
+        <img src="images/perangkat/ROKHMAN.png" alt="Kaur Umum">
+        <h4>ROKHMAN</h4>
+        <p>Kaur Umum</p>
+      </div>
+
+      <div class="perangkat-card">
+        <img src="images/perangkat/TRI_NURYANI_removebg_preview.png" alt="Kasi Pemerintahan">
+        <h4>TRI NURYANI, S.P</h4>
+        <p>Kasi Pemerintahan</p>
+      </div>
+
+      <div class="perangkat-card">
+        <img src="images/perangkat/KHAERON.png" alt="Kasi Kesejahteraan Rakyat">
+        <h4>KHAERON</h4>
+        <p>Kasi Kesejahteraan Rakyat</p>
+      </div>
+
+            <div class="perangkat-card">
+        <img src="images/perangkat/lebe_sukardi.jpg" alt="Kasi Pelayanan">
+        <h4>SUKARDI</h4>
+        <p>Kasi Pelayanan</p>
+      </div>
+
+      <div class="perangkat-card">
+        <img src="images/perangkat/ROCHMAN.png" alt="Kaur Keuangan">
+        <h4>ROCHMAN</h4>
+        <p>Kaur Keuangan</p>
+      </div>
+
+      <div class="perangkat-card">
+        <img src="images/perangkat/blankprofile.png" alt="Kaur Perencanaan">
+        <h4>TARKO CIPTO</h4>
+        <p>Kaur Perencanaan</p>
+      </div>
+
+      <div class="perangkat-card">
+        <img src="images/perangkat/BAMBANG_IRWANTO.png" alt="Kadus Blado">
+        <h4>BAMBANG IRWANTO</h4>
+        <p>Kadus Blado</p>
+      </div>
+
+      <div class="perangkat-card">
+        <img src="images/perangkat/HARTONO.png" alt="Kadus Grogol">
+        <h4>HARTONO</h4>
+        <p>Kadus Grogol</p>
+      </div>
+
+      <div class="perangkat-card">
+        <img src="images/perangkat/SLAMET_crop.png" alt="Kadus Kepokoh">
+        <h4>SLAMET</h4>
+        <p>Kadus Kepokoh</p>
+      </div>
+
+      <div class="perangkat-card">
+        <img src="images/perangkat/blankprofile.png" alt="Kadus Sembir / Banyuanyar">
+        <h4>INDRATMO, S.Pd</h4>
+        <p>Kadus Sembir / Banyuanyar</p>
+      </div>
+
+      <div class="perangkat-card">
+        <img src="images/perangkat/GUNAWAN.png" alt="Kadus Bandusari">
+        <h4>GUNAWAN</h4>
+        <p>Kadus Bandusari</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer" class="footer">
+  <div class="container">
+    <h4>DESA BLADO</h4>
+    <p>Blado – Batang – Jawa Tengah</p>
+    <p>
+      Website ini dibuat oleh Tim KKN PPM UGM Naraswara Blado 2025/2026
+    </p>
+    <div class="footer-contact">
+      <p>Balai Desa Blado</p>
+      <p>Jl. Raya Blado–Pagilaran No. 1</p>
+      <p>Kode Pos 51255</p>
+      <p>Email: blado@desa.id</p>
+    </div>
+    <div class="footer-logos">
+      <img src="images/dpkm.png" alt="Logo DPKM">
+      <img src="images/logougm.png" alt="Logo UGM">
+      <img src="images/blado-logo.png" alt="Logo Naraswara Blado">
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="map.js"></script>
 </body>
 </html>
