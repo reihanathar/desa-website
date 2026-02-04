@@ -6,6 +6,7 @@
     <title>DESA BLADO</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="stylelist.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 
     <script>
         function showService(serviceId) {
@@ -35,6 +36,7 @@
     <nav>
         <a href="#about">About</a>
         <a href="#events">Events</a>
+        <a href="#map">Map</a>
         <a href="#services">Services</a>
         <a href="#contact">Contact</a>
     </nav>
@@ -62,6 +64,60 @@
                 <h3>📚 Community Book Fair</h3>
                 <p><strong>Date:</strong> October 5<br>
                 Browse books, meet local authors, and enjoy storytelling sessions for children.</p>
+            </div>
+        </section>
+
+        <section id="map" class="section">
+            <h2>Interactive Village Map</h2>
+            <p>Pilih mode peta Desa Blado: peta administratif, peta bencana, peta fasilitas umum, atau peta faskes. Setiap mode punya informasi yang berbeda agar warga lebih mudah melihat kondisi desa.</p>
+            <div class="map-wrapper">
+                <div class="map-area">
+                    <div class="map-toolbar">
+                        <label for="mapMode">Mode Peta</label>
+                        <select id="mapMode" aria-label="Pilih mode peta">
+                            <option value="administratif">Peta Administratif</option>
+                            <option value="bencana">Peta Bencana</option>
+                            <option value="fasilitas">Peta Fasilitas Umum</option>
+                            <option value="faskes">Peta Faskes</option>
+                        </select>
+                        <div class="map-status" id="mapStatus">Menampilkan peta administratif.</div>
+                    </div>
+                    <div id="village-map" class="map-canvas" role="application" aria-label="Interactive map of Desa Blado"></div>
+                </div>
+                <div class="map-legend">
+                    <h3 id="mapLegendTitle">Legenda Administratif</h3>
+                    <ul id="mapLegendList">
+                        <li>🏛️ Kantor Kecamatan Blado</li>
+                        <li>🏘️ Balai Desa</li>
+                        <li>📍 Batas Dusun</li>
+                    </ul>
+                    <div class="map-panel" id="facilitiesPanel">
+                        <h4>🔍 Cari & Filter Fasilitas</h4>
+                        <input type="text" id="searchInput" placeholder="Cari fasilitas..." />
+                        <div class="category-filter">
+                            <label><input type="checkbox" id="checkAll" checked> <strong>Semua</strong></label>
+                            <label><input type="checkbox" class="category-check" value="Kesehatan" checked> Kesehatan</label>
+                            <label><input type="checkbox" class="category-check" value="Pendidikan" checked> Pendidikan</label>
+                            <label><input type="checkbox" class="category-check" value="Pemerintahan" checked> Pemerintahan</label>
+                            <label><input type="checkbox" class="category-check" value="Ekonomi" checked> Ekonomi</label>
+                            <label><input type="checkbox" class="category-check" value="Tempat Ibadah" checked> Tempat Ibadah</label>
+                            <label><input type="checkbox" class="category-check" value="SD" checked> SD</label>
+                            <label><input type="checkbox" class="category-check" value="SMP" checked> SMP</label>
+                            <label><input type="checkbox" class="category-check" value="TK" checked> TK</label>
+                            <label><input type="checkbox" class="category-check" value="PAUD" checked> PAUD</label>
+                        </div>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span>Total Fasilitas</span>
+                                <span id="totalFacilities">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Ditampilkan</span>
+                                <span id="visibleFacilities">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -354,5 +410,219 @@
         <p>&copy; 2026 Desa Blado. All rights reserved.</p>
         <p>Building community, one neighbor at a time.</p>
     </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        const geojsonFacilities = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{"Title":"Apotek Moro Sehat","Date Creat":"2025-12-25T09:32:08+07:00","Latitude":"-7.06783458846171","Longitude":"109.833512440622","Northing":"0","Easting":"0","Descriptio":"Apotek","Elevation":"536.934359","Kategori":"Kesehatan"},"geometry":{"type":"Point","coordinates":[109.833512440622002,-7.06783458846171]}},{"type":"Feature","properties":{"Title":"Apotek Ada Market","Date Creat":"2025-12-25T09:33:04+07:00","Latitude":"-7.06824644847819","Longitude":"109.831891448716","Northing":"0","Easting":"0","Descriptio":"Apotek","Elevation":null,"Kategori":"Kesehatan"},"geometry":{"type":"Point","coordinates":[109.831891448715993,-7.06824644847819]}},{"type":"Feature","properties":{"Title":"Apotek Al Aieza","Date Creat":"2025-12-25T09:12:32+07:00","Latitude":"-7.0685137550777","Longitude":"109.834214653834","Northing":"0","Easting":"0","Descriptio":"Apotek","Elevation":"537.654492","Kategori":"Kesehatan"},"geometry":{"type":"Point","coordinates":[109.83412210372839,-7.068508652483597]}},{"type":"Feature","properties":{"Title":"Apotek Enggal Sehat","Date Creat":"2025-12-25T07:04:52+07:00","Latitude":"-7.07079084682167","Longitude":"109.833567105008","Northing":"0","Easting":"0","Descriptio":"Apotek","Elevation":"544.287143","Kategori":"Kesehatan"},"geometry":{"type":"Point","coordinates":[109.833567105008001,-7.07079084682167]}},{"type":"Feature","properties":{"Title":"Balai Desa Blado","Date Creat":"2025-12-25T07:00:38+07:00","Latitude":"-7.07113736150534","Longitude":"109.834026634478","Northing":"0","Easting":"0","Descriptio":"Kantor Desa","Elevation":"546.731749","Kategori":"Pemerintahan"},"geometry":{"type":"Point","coordinates":[109.834026634477993,-7.07113736150534]}},{"type":"Feature","properties":{"Title":"Bank BRI Unit Blado","Date Creat":"2025-12-25T09:12:23+07:00","Latitude":"-7.06855152471231","Longitude":"109.834281235287","Northing":"0","Easting":"0","Descriptio":"Bank","Elevation":"537.175106","Kategori":"Ekonomi"},"geometry":{"type":"Point","coordinates":[109.834281235286994,-7.06855152471231]}},{"type":"Feature","properties":{"Title":"Gereja GPDI Elim Blado","Date Creat":"2025-12-25T09:10:39+07:00","Latitude":"-7.06810318259595","Longitude":"109.835931883527","Northing":"0","Easting":"0","Descriptio":"Gereja","Elevation":"523.706049","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.835931883526996,-7.06810318259595]}},{"type":"Feature","properties":{"Title":"Kantor Kecamatan Blado","Date Creat":"2025-12-25T07:05:14+07:00","Latitude":"-7.06804126912288","Longitude":"109.834234859106","Northing":"0","Easting":"0","Descriptio":"Kantor Kecamatan","Elevation":"537.509014","Kategori":"Pemerintahan"},"geometry":{"type":"Point","coordinates":[109.834234859106004,-7.06804126912288]}},{"type":"Feature","properties":{"Title":"Koramil 09 Blado","Date Creat":"2025-12-25T07:03:48+07:00","Latitude":"-7.06918716515978","Longitude":"109.83396605038","Northing":"0","Easting":"0","Descriptio":"Koramil","Elevation":"538.053296","Kategori":"Pemerintahan"},"geometry":{"type":"Point","coordinates":[109.833966050379999,-7.06918716515978]}},{"type":"Feature","properties":{"Title":"KPRI Lestari","Date Creat":"2025-12-25T10:54:20+07:00","Latitude":"-7.06883363634211","Longitude":"109.833613138266","Northing":"0","Easting":"0","Descriptio":"Koperasi","Elevation":"539.000000","Kategori":"Ekonomi"},"geometry":{"type":"Point","coordinates":[109.833613138266003,-7.06883363634211]}},{"type":"Feature","properties":{"Title":"Madrasah Diniyah Al Hidayah","Date Creat":"2025-12-25T10:57:42+07:00","Latitude":"-7.07053597635119","Longitude":"109.833027120723","Northing":"0","Easting":"0","Descriptio":"Sekolah","Elevation":"546.292666","Kategori":"Pendidikan"},"geometry":{"type":"Point","coordinates":[109.833027120723003,-7.07053597635119]}},{"type":"Feature","properties":{"Title":"Masjid Al ikhlas","Date Creat":"2025-12-25T06:59:18+07:00","Latitude":"-7.07259753164102","Longitude":"109.835289469522","Northing":"0","Easting":"0","Descriptio":"Masjid","Elevation":"549.266933","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.835289469521996,-7.07259753164102]}},{"type":"Feature","properties":{"Title":"Masjid Al Ishlah (YAMP)","Date Creat":"2025-12-25T06:59:42+07:00","Latitude":"-7.07155379809381","Longitude":"109.833499000395","Northing":"0","Easting":"0","Descriptio":"Masjid","Elevation":"549.132359","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.833499000394994,-7.07155379809381]}},{"type":"Feature","properties":{"Title":"Masjid Baitul Ma'mur","Date Creat":"2025-12-25T09:39:11+07:00","Latitude":"-7.06619784782829","Longitude":"109.82982215207","Northing":"0","Easting":"0","Descriptio":"Masjid","Elevation":"524.312252","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.829822152069994,-7.06619784782829]}},{"type":"Feature","properties":{"Title":"Masjid Banyu Anyar Blado Batang","Date Creat":"2025-12-25T09:40:01+07:00","Latitude":"-7.06424633483583","Longitude":"109.824655040329","Northing":"0","Easting":"0","Descriptio":"Masjid","Elevation":"511.930635","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.824655040329006,-7.06424633483583]}},{"type":"Feature","properties":{"Title":"Masjid Desa Bandusari","Date Creat":"2025-12-25T07:07:22+07:00","Latitude":"-7.06755467484375","Longitude":"109.833447751678","Northing":"0","Easting":"0","Descriptio":"Masjid","Elevation":"537.511228","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.833447751677994,-7.06755467484375]}},{"type":"Feature","properties":{"Title":"Masjid Nurul Huda","Date Creat":"2025-12-25T09:37:30+07:00","Latitude":"-7.07730848112274","Longitude":"109.833031978973","Northing":"0","Easting":"0","Descriptio":"Masjid","Elevation":"584.395408","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.833031978972997,-7.07730848112274]}},{"type":"Feature","properties":{"Title":"Masjid Roudhotu Tholibin","Date Creat":"2025-12-25T09:37:54+07:00","Latitude":"-7.0754614591903","Longitude":"109.826258769907","Northing":"0","Easting":"0","Descriptio":"Masjid","Elevation":"556.565718","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.826258769907,-7.0754614591903]}},{"type":"Feature","properties":{"Title":"Masjid Sabiilunnajaah","Date Creat":"2025-12-25T09:39:41+07:00","Latitude":"-7.06695483806874","Longitude":"109.828318693663","Northing":"0","Easting":"0","Descriptio":"Masjid","Elevation":"528.982742","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.828318693662993,-7.06695483806874]}},{"type":"Feature","properties":{"Title":"Masjid/Musholla Kepokoh","Date Creat":"2025-12-25T11:13:39+07:00","Latitude":"-7.07570674493056","Longitude":"109.826779189411","Northing":"0","Easting":"0","Descriptio":"Masjid","Elevation":"560.405082","Kategori":"Tempat Ibadah"},"geometry":{"type":"Point","coordinates":[109.826779189410999,-7.07570674493056]}},{"type":"Feature","properties":{"Title":"Pasar blado","Date Creat":"2025-12-25T06:50:09+07:00","Latitude":"-7.06901711584934","Longitude":"109.833405791454","Northing":"0","Easting":"0","Descriptio":"Pasar","Elevation":"539.341205","Kategori":"Ekonomi"},"geometry":{"type":"Point","coordinates":[109.833405791453998,-7.06901711584934]}},{"type":"Feature","properties":{"Title":"PKBM Hati Mulya","Date Creat":"2025-12-25T09:15:00+07:00","Latitude":"-7.07240417042196","Longitude":"109.83431732466","Northing":"0","Easting":"0","Descriptio":"PKBM","Elevation":"554.728153","Kategori":"Pendidikan"},"geometry":{"type":"Point","coordinates":[109.834317324660006,-7.07240417042196]}},{"type":"Feature","properties":{"Title":"Kantor Polisi Sektor Blado","Date Creat":"2025-12-25T06:48:24+07:00","Latitude":"-7.07188273183192","Longitude":"109.83388952883","Northing":"0","Easting":"0","Descriptio":"Kantor Polisi","Elevation":"554.334527","Kategori":"Pemerintahan"},"geometry":{"type":"Point","coordinates":[109.833889528829999,-7.07188273183192]}},{"type":"Feature","properties":{"Title":"Puskesmas Blado 1","Date Creat":"2025-12-25T07:01:57+07:00","Latitude":"-7.06953653446004","Longitude":"109.83396010556","Northing":"0","Easting":"0","Descriptio":"Puskesmas","Elevation":"539.075144","Kategori":"Kesehatan"},"geometry":{"type":"Point","coordinates":[109.833960105559996,-7.06953653446004]}},{"type":"Feature","properties":{"Title":"SD Blado 2","Date Creat":"2025-12-25T09:36:17+07:00","Latitude":"-7.075654941352","Longitude":"109.828227001229","Northing":"0","Easting":"0","Descriptio":"Sekolah","Elevation":"557.813951","Kategori":"SD"},"geometry":{"type":"Point","coordinates":[109.828227001228996,-7.075654941352]}},{"type":"Feature","properties":{"Title":"SD N Blado 1","Date Creat":"2025-12-25T07:01:31+07:00","Latitude":"-7.06987410061882","Longitude":"109.833939893271","Northing":"0","Easting":"0","Descriptio":"Sekolah","Elevation":"541.456671","Kategori":"SD"},"geometry":{"type":"Point","coordinates":[109.833939893270994,-7.06987410061882]}},{"type":"Feature","properties":{"Title":"SD N Blado 3","Date Creat":"2025-12-25T09:35:06+07:00","Latitude":"-7.06715230109544","Longitude":"109.834184774205","Northing":"0","Easting":"0","Descriptio":"Sekolah","Elevation":"543.641183","Kategori":"SD"},"geometry":{"type":"Point","coordinates":[109.834184774204999,-7.06715230109544]}},{"type":"Feature","properties":{"Title":"SMP N 1 Blado","Date Creat":"2025-12-25T07:01:11+07:00","Latitude":"-7.07047922288412","Longitude":"109.834275483945","Northing":"0","Easting":"0","Descriptio":"Sekolah","Elevation":"544.441110","Kategori":"SMP"},"geometry":{"type":"Point","coordinates":[109.834275483945007,-7.07047922288412]}},{"type":"Feature","properties":{"Title":"Terminal Blado","Date Creat":"2025-12-25T10:14:14+07:00","Latitude":"-7.06851390132545","Longitude":"109.833302102733","Northing":"0","Easting":"0","Descriptio":null,"Elevation":"536.650045","Kategori":null},"geometry":{"type":"Point","coordinates":[109.833302102733001,-7.06851390132545]}},{"type":"Feature","properties":{"Title":"TK Mardu Siwi","Date Creat":"2025-12-25T09:34:43+07:00","Latitude":"-7.07046537590927","Longitude":"109.83539932839","Northing":"0","Easting":"0","Descriptio":"Sekolah","Elevation":"540.857940","Kategori":"TK"},"geometry":{"type":"Point","coordinates":[109.835399328389997,-7.07046537590927]}},{"type":"Feature","properties":{"Title":"Paud Mekar Asri","Date Creat":"2025-12-27T16:42:02+07:00","Latitude":"-7.06430660060858","Longitude":"109.8280273807","Northing":"0","Easting":"0","Descriptio":"Sekolah","Elevation":"505.460953","Kategori":"PAUD"},"geometry":{"type":"Point","coordinates":[109.828027380699993,-7.06430660060858]}},{"type":"Feature","properties":{"Title":"TPA An Nadhliyah","Date Creat":"2025-12-25T11:16:38+07:00","Latitude":"-7.07545740666041","Longitude":"109.826139192621","Northing":"0","Easting":"0","Descriptio":null,"Elevation":"555.531235","Kategori":"Pendidikan"},"geometry":{"type":"Point","coordinates":[109.826139192621,-7.07545740666041]}},{"type":"Feature","properties":{"Title":"UPT Disdikpora Kecamatan Blado","Date Creat":"2025-12-25T07:00:57+07:00","Latitude":"-7.07101579093728","Longitude":"109.83400404436","Northing":"0","Easting":"0","Descriptio":"Disdikpora","Elevation":"546.071407","Kategori":"Pemerintahan"},"geometry":{"type":"Point","coordinates":[109.83400404436,-7.07101579093728]}}]};
+        const categoryColors = {
+            'Kesehatan': '#e74c3c',
+            'Pendidikan': '#3498db',
+            'Pemerintahan': '#9b59b6',
+            'Ekonomi': '#f39c12',
+            'Tempat Ibadah': '#27ae60',
+            'SD': '#16a085',
+            'SMP': '#2980b9',
+            'TK': '#8e44ad',
+            'PAUD': '#c0392b'
+        };
+
+        const adminLocations = [
+            { name: 'Kantor Kecamatan Blado', coords: [-7.068041, 109.834234], description: 'Pusat administrasi kecamatan.' },
+            { name: 'Balai Desa Blado', coords: [-7.071137, 109.834026], description: 'Kantor pelayanan desa.' },
+            { name: 'Batas Dusun', coords: [-7.0742, 109.8308], description: 'Penanda batas dusun utama.' }
+        ];
+
+        const disasterLocations = [
+            { name: 'Zona Rawan Longsor', coords: [-7.0784, 109.8296], description: 'Area rawan longsor saat hujan lebat.' },
+            { name: 'Posko Siaga Bencana', coords: [-7.0706, 109.8329], description: 'Posko koordinasi tanggap darurat.' },
+            { name: 'Jalur Evakuasi', coords: [-7.0669, 109.8362], description: 'Rute evakuasi menuju area aman.' }
+        ];
+
+        let map;
+        let adminLayer;
+        let disasterLayer;
+        let facilitiesLayer;
+        let faskesLayer;
+        let facilityMarkers = [];
+
+        function createMarkerIcon(color) {
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background-color: ${color}; width: 22px; height: 22px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.25);"></div>`,
+                iconSize: [22, 22],
+                iconAnchor: [11, 11]
+            });
+        }
+
+        function buildSimpleLayer(locations, color) {
+            const layer = L.layerGroup();
+            locations.forEach(location => {
+                L.marker(location.coords, { icon: createMarkerIcon(color) })
+                    .bindPopup(`<strong>${location.name}</strong><br>${location.description}`)
+                    .addTo(layer);
+            });
+            return layer;
+        }
+
+        function createPopupContent(properties) {
+            const kategori = properties.Kategori || 'Lainnya';
+            return `
+                <div class="popup-title">${properties.Title}</div>
+                <div class="popup-info"><strong>Kategori:</strong> <span class="category-badge" style="background:${categoryColors[kategori] || '#95a5a6'}">${kategori}</span></div>
+                <div class="popup-info"><strong>Deskripsi:</strong> ${properties.Descriptio || '-'}</div>
+                <div class="popup-info"><strong>Elevasi:</strong> ${properties.Elevation ? parseFloat(properties.Elevation).toFixed(2) + ' m' : '-'}</div>
+                <div class="popup-info"><strong>Koordinat:</strong> ${properties.Latitude}, ${properties.Longitude}</div>
+            `;
+        }
+
+        function buildFacilitiesLayer() {
+            facilitiesLayer = L.layerGroup();
+            facilityMarkers = [];
+            geojsonFacilities.features.forEach(feature => {
+                const props = feature.properties;
+                const coords = feature.geometry.coordinates;
+                const kategori = props.Kategori || 'Lainnya';
+                const marker = L.marker([coords[1], coords[0]], {
+                    icon: createMarkerIcon(categoryColors[kategori] || '#95a5a6')
+                }).bindPopup(createPopupContent(props));
+                marker.properties = props;
+                marker.addTo(facilitiesLayer);
+                facilityMarkers.push(marker);
+            });
+            updateStats();
+        }
+
+        function buildFaskesLayer() {
+            faskesLayer = L.layerGroup();
+            geojsonFacilities.features
+                .filter(feature => feature.properties.Kategori === 'Kesehatan')
+                .forEach(feature => {
+                    const props = feature.properties;
+                    const coords = feature.geometry.coordinates;
+                    L.marker([coords[1], coords[0]], {
+                        icon: createMarkerIcon('#e74c3c')
+                    })
+                        .bindPopup(`<strong>${props.Title}</strong><br>${props.Descriptio || 'Fasilitas kesehatan'}`)
+                        .addTo(faskesLayer);
+                });
+        }
+
+        function updateStats(visibleCount = facilityMarkers.length) {
+            document.getElementById('totalFacilities').textContent = facilityMarkers.length;
+            document.getElementById('visibleFacilities').textContent = visibleCount;
+        }
+
+        function filterMarkers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategories = Array.from(document.querySelectorAll('.category-check:checked')).map(cb => cb.value);
+            facilitiesLayer.clearLayers();
+            let visibleCount = 0;
+            facilityMarkers.forEach(marker => {
+                const title = marker.properties.Title.toLowerCase();
+                const kategori = marker.properties.Kategori || 'Lainnya';
+                if (selectedCategories.includes(kategori) && title.includes(searchTerm)) {
+                    marker.addTo(facilitiesLayer);
+                    visibleCount++;
+                }
+            });
+            updateStats(visibleCount);
+        }
+
+        function toggleAll(checkbox) {
+            document.querySelectorAll('.category-check').forEach(cb => {
+                cb.checked = checkbox.checked;
+            });
+            filterMarkers();
+        }
+
+        function setLegend(mode) {
+            const legendTitle = document.getElementById('mapLegendTitle');
+            const legendList = document.getElementById('mapLegendList');
+            const facilitiesPanel = document.getElementById('facilitiesPanel');
+            const mapStatus = document.getElementById('mapStatus');
+
+            const legends = {
+                administratif: {
+                    title: 'Legenda Administratif',
+                    status: 'Menampilkan peta administratif.',
+                    items: ['🏛️ Kantor Kecamatan', '🏘️ Balai Desa', '📍 Batas Dusun']
+                },
+                bencana: {
+                    title: 'Legenda Bencana',
+                    status: 'Menampilkan peta bencana.',
+                    items: ['⚠️ Zona Rawan', '🆘 Posko Siaga', '➡️ Jalur Evakuasi']
+                },
+                fasilitas: {
+                    title: 'Legenda Fasilitas Umum',
+                    status: 'Menampilkan peta fasilitas umum.',
+                    items: ['🏥 Kesehatan', '🎓 Pendidikan', '🏛️ Pemerintahan', '🛒 Ekonomi', '🕌 Tempat Ibadah']
+                },
+                faskes: {
+                    title: 'Legenda Faskes',
+                    status: 'Menampilkan peta fasilitas kesehatan.',
+                    items: ['🏥 Puskesmas', '💊 Apotek', '❤️ Klinik']
+                }
+            };
+
+            const selected = legends[mode];
+            legendTitle.textContent = selected.title;
+            mapStatus.textContent = selected.status;
+            legendList.innerHTML = selected.items.map(item => `<li>${item}</li>`).join('');
+            facilitiesPanel.style.display = mode === 'fasilitas' ? 'block' : 'none';
+        }
+
+        function showLayer(layer) {
+            [adminLayer, disasterLayer, facilitiesLayer, faskesLayer].forEach(activeLayer => {
+                if (map.hasLayer(activeLayer)) {
+                    map.removeLayer(activeLayer);
+                }
+            });
+            layer.addTo(map);
+            const group = L.featureGroup(layer.getLayers());
+            if (group.getLayers().length > 0) {
+                map.fitBounds(group.getBounds().pad(0.12));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            map = L.map('village-map').setView([-7.070, 109.833], 14);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            adminLayer = buildSimpleLayer(adminLocations, '#2d5016');
+            disasterLayer = buildSimpleLayer(disasterLocations, '#e67e22');
+            buildFacilitiesLayer();
+            buildFaskesLayer();
+
+            const mapMode = document.getElementById('mapMode');
+            mapMode.addEventListener('change', event => {
+                const mode = event.target.value;
+                setLegend(mode);
+                if (mode === 'administratif') {
+                    showLayer(adminLayer);
+                } else if (mode === 'bencana') {
+                    showLayer(disasterLayer);
+                } else if (mode === 'fasilitas') {
+                    showLayer(facilitiesLayer);
+                } else {
+                    showLayer(faskesLayer);
+                }
+            });
+
+            document.getElementById('checkAll').addEventListener('change', function() {
+                toggleAll(this);
+            });
+            document.querySelectorAll('.category-check').forEach(checkbox => {
+                checkbox.addEventListener('change', filterMarkers);
+            });
+            document.getElementById('searchInput').addEventListener('keyup', filterMarkers);
+
+            setLegend('administratif');
+            showLayer(adminLayer);
+        });
+    </script>
 </body>
 </html>
